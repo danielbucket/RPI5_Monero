@@ -1,0 +1,44 @@
+# Docker ignore file for Monero miner
+
+# Extracted Monero binaries (x86_64 - not needed for ARM64 build)
+monero-x86_64-linux-gnu-v*/
+*.tar.bz2
+
+# Environment files
+.env
+
+# Logs
+logs/*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if any)
+node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Build artifacts
+dist/
+build/

@@ -1,0 +1,37 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # XMRig Miner
+  - job_name: "xmrig"
+    static_configs:
+      - targets: ["monero-miner-rpi5:8080"]
+    metrics_path: "/1/summary"
+    scrape_interval: 30s
+
+  # Monero Daemon
+  - job_name: "monerod"
+    static_configs:
+      - targets: ["monerod-rpi5:18081"]
+    metrics_path: "/get_info"
+    scrape_interval: 60s
+
+  # Node Exporter (system metrics)
+  - job_name: "node"
+    static_configs:
+      - targets: ["node-exporter:9100"]
+
+  # cAdvisor (container metrics)
+  - job_name: "cadvisor"
+    static_configs:
+      - targets: ["cadvisor:8080"]
