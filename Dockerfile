@@ -100,7 +100,7 @@ ENV LOG_LEVEL=2
 # Wallet-related environment variables
 ENV WALLET_NAME="mining-wallet"
 # Note: WALLET_PASSWORD should be provided at runtime for security
-ENV DAEMON_HOST="node.supportxmr.com"
+ENV DAEMON_HOST="monerod-rpi5"
 ENV DAEMON_PORT="18081"
 ENV RESTORE_HEIGHT=""
 

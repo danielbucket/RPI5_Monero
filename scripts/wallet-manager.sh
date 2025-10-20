@@ -13,7 +13,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 WALLET_DIR="/home/miner/.bitmonero"
-DAEMON_HOST=${DAEMON_HOST:-"node.supportxmr.com"}
+DAEMON_HOST=${DAEMON_HOST:-"monerod-rpi5"}
 DAEMON_PORT=${DAEMON_PORT:-"18081"}
 WALLET_NAME=${WALLET_NAME:-"mining-wallet"}
 

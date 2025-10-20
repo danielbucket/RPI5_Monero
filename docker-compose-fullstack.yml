@@ -47,18 +47,19 @@ services:
     container_name: monerod-rpi5
     restart: unless-stopped
     
-    command: >
-      --rpc-bind-ip=0.0.0.0
-      --rpc-bind-port=18081
-      --restricted-rpc
-      --confirm-external-bind
-      --non-interactive
-      --no-igd
-      --db-sync-mode=fast:async:250000000bytes
-      --fast-block-sync=1
-      --block-sync-size=20
-      --prep-blocks-threads=2
-      --max-concurrency=2
+    command: [
+      "--rpc-bind-ip=0.0.0.0",
+      "--rpc-bind-port=18081", 
+      "--restricted-rpc",
+      "--confirm-external-bind",
+      "--no-igd",
+      "--db-sync-mode=fast:async:1000000000bytes",
+      "--fast-block-sync=1",
+      "--block-sync-size=50",
+      "--prep-blocks-threads=4",
+      "--max-concurrency=4",
+      "--max-txpool-weight=268435456"
+    ]
     
     ports:
       - "18081:18081"
