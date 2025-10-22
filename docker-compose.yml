@@ -34,19 +34,26 @@ services:
       - ./logs/miner:/var/log/miner
       - ./wallets:/home/miner/.bitmonero
       - xmrig-cache:/home/miner/.cache
+      - /dev/hugepages:/dev/hugepages:rw
     
     networks:
       - monero-net
       - monitoring
     
+    cap_add:
+      - IPC_LOCK
+      - SYS_NICE
+    
+    privileged: true
+    
     deploy:
       resources:
         limits:
-          memory: 4G
-          cpus: '3.0'
+          memory: 6G
+          cpus: '4.0'
         reservations:
-          memory: 2G
-          cpus: '2.0'
+          memory: 3G
+          cpus: '3.0'
     
     labels:
       - "prometheus.io/scrape=true"

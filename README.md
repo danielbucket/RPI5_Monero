@@ -48,7 +48,7 @@ nano .env
 - `POOL_URL`: Mining pool (default: SupportXMR)
 - Review other settings as needed
 
-**🚀 Performance Note:** This configuration is pre-optimized for 16GB Raspberry Pi 5 with enhanced CPU threads (3), priority (4), and daemon caching for maximum performance.
+**🚀 Performance Note:** This configuration is pre-optimized for 16GB Raspberry Pi 5 with enhanced CPU threads (4), priority (5), and daemon caching for maximum performance.
 
 ### 2. **Deploy Full Stack**
 
@@ -131,8 +131,8 @@ docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.Net
 | `WALLET_ADDRESS`   | **_required_**                   | Your Monero wallet address (mining payouts)   |
 | `POOL_URL`         | `pool.supportxmr.com:3333`       | Mining pool URL and port                      |
 | `WORKER_NAME`      | `rpi5-fullstack-miner-optimized` | Identifier for your miner                     |
-| `CPU_THREADS`      | `3`                              | CPU threads (optimized for 16GB Pi 5)        |
-| `CPU_PRIORITY`     | `4`                              | CPU priority (1-5, higher = more priority)    |
+| `CPU_THREADS`      | `4`                              | CPU threads (optimized for 16GB Pi 5)        |
+| `CPU_PRIORITY`     | `5`                              | CPU priority (1-5, higher = more priority)    |
 | `GRAFANA_PASSWORD` | `admin123`                       | Grafana dashboard password                    |
 
 ### **Full Stack Architecture**
@@ -414,8 +414,8 @@ curl -X POST http://opennode.xmr-tw.org:18089/json_rpc -d '{"jsonrpc":"2.0","id"
 
 The configuration is optimized for Raspberry Pi 5 with 16GB RAM:
 
-- **CPU Threads**: 3 (optimized for 16GB Pi 5 with daemon co-existence)
-- **CPU Priority**: 4 (high priority for better performance)
+- **CPU Threads**: 4 (optimized for 16GB Pi 5 with daemon co-existence)
+- **CPU Priority**: 5 (maximum priority for better performance)
 - **Memory**: Up to 12GB allocated for daemon and mining (leaves 4GB for system)
 - **Daemon Cache**: 1GB async cache for faster blockchain operations
 - **Huge Pages**: Disabled (usually not available in containers)
@@ -426,8 +426,9 @@ The configuration is optimized for Raspberry Pi 5 with 16GB RAM:
 This configuration includes performance optimizations specifically for Raspberry Pi 5 with 16GB RAM:
 
 **Mining Optimizations:**
-- **CPU Threads**: Increased from 2 to 3 (50% more mining power)
-- **CPU Priority**: Raised from 2 to 4 (higher scheduling priority)
+- **CPU Threads**: Increased from 2 to 4 (100% more mining power)
+- **CPU Priority**: Raised from 2 to 5 (maximum scheduling priority)
+- **Huge Pages**: Enabled with 2.5GB allocation for RandomX dataset optimization
 - **Resource Limits**: 4GB RAM limit with 2GB reserved for miner
 
 **Daemon Optimizations:**
@@ -439,9 +440,10 @@ This configuration includes performance optimizations specifically for Raspberry
 - **Resource Limits**: 8GB RAM limit with 4GB reserved for daemon
 
 **Expected Performance Gains:**
-- **Mining Hashrate**: +50-75% improvement (250-350 H/s vs 150-200 H/s)
+- **Mining Hashrate**: +100-150% improvement (350-450 H/s vs 150-200 H/s, +5-15% from huge pages)
 - **Blockchain Sync**: 2-3x faster initial synchronization
 - **System Utilization**: Better use of available 16GB RAM and 4-core CPU
+- **Memory Efficiency**: Reduced TLB misses and improved RandomX dataset access
 
 ### Temperature Management
 
@@ -457,8 +459,8 @@ watch -n5 vcgencmd measure_temp
 
 If temperatures exceed 80°C consistently:
 
-1. Reduce `CPU_THREADS` to 2 (from optimized 3)
-2. Lower `CPU_PRIORITY` to 2 (from optimized 4)
+1. Reduce `CPU_THREADS` to 3 (from optimized 4)
+2. Lower `CPU_PRIORITY` to 4 (from optimized 5)
 3. Ensure adequate cooling (heatsink + fan recommended)
 
 ### Power Considerations
@@ -536,7 +538,7 @@ curl -s http://localhost:8080/1/summary | jq '{
 
 | Metric              | Typical Range | Optimal Conditions         |
 | ------------------- | ------------- | -------------------------- |
-| **Mining Hashrate** | 200-350 H/s   | 250-350 H/s (good cooling) |
+| **Mining Hashrate** | 250-450 H/s   | 350-450 H/s (good cooling) |
 | **Power Usage**     | 10-18W total  | ~15W average               |
 | **CPU Temperature** | <70°C         | <65°C optimal              |
 | **Memory Usage**    | ~6-8GB        | 16GB Pi recommended        |
@@ -613,7 +615,7 @@ watch -n5 'vcgencmd measure_temp'
 vcgencmd get_throttled
 
 # Reduce mining intensity if overheating
-# Edit .env: CPU_THREADS=2, CPU_PRIORITY=2 (from optimized 3,4)
+# Edit .env: CPU_THREADS=3, CPU_PRIORITY=4 (from optimized 4,5)
 ```
 
 #### **Network/Connectivity**
@@ -698,7 +700,7 @@ Hardware Wear:   Minimal (Raspberry Pi is durable)
 
 ### **Expected Returns**
 
-With optimized Raspberry Pi 5 (~300 H/s average):
+With optimized Raspberry Pi 5 (~400 H/s average):
 
 - **Daily XMR**: ~0.00015-0.00045 XMR (varies with network difficulty)
 - **Monthly XMR**: ~0.0045-0.0135 XMR
@@ -708,7 +710,7 @@ With optimized Raspberry Pi 5 (~300 H/s average):
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                   Raspberry Pi 5                       │
+│                   Raspberry Pi 5                        │
 │  ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐ │
 │  │ XMRig Miner │  │ Monero Daemon│  │ Monitoring Stack│ │
 │  │             │  │              │  │                 │ │

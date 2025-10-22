@@ -27,10 +27,10 @@
     },
     "cpu": {
         "enabled": true,
-        "huge-pages": false,
+        "huge-pages": true,
         "huge-pages-jit": false,
         "hw-aes": null,
-        "priority": 4,
+        "priority": 5,
         "memory-pool": false,
         "yield": true,
         "max-threads-hint": 100,
@@ -38,12 +38,12 @@
         "argon2-impl": null,
         "cn/0": false,
         "cn-lite/0": false,
-        "rx": [0, 1, 2],
-        "rx/wow": [0, 1, 2],
-        "cn/2": [0, 1, 2],
-        "cn/r": [0, 1, 2],
-        "cn-pico": [0, 1, 2],
-        "cn-heavy": [0, 1, 2]
+        "rx": [0, 1, 2, 3],
+        "rx/wow": [0, 1, 2, 3],
+        "cn/2": [0, 1, 2, 3],
+        "cn/r": [0, 1, 2, 3],
+        "cn-pico": [0, 1, 2, 3],
+        "cn-heavy": [0, 1, 2, 3]
     },
     "opencl": {
         "enabled": false,
